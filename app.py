@@ -23,7 +23,7 @@ app = Flask(__name__)
 FREEFIRE_UPDATE_URL = "https://clientbp.ggblueshark.com/UpdateSocialBasicInfo"
 MAJOR_LOGIN_URL = "https://loginbp.ggblueshark.com/MajorLogin"
 OAUTH_URL = "https://100067.connect.garena.com/oauth/guest/token/grant"
-FREEFIRE_VERSION = "OB51"
+FREEFIRE_VERSION = "OB52"
 
 KEY = bytes([89, 103, 38, 116, 99, 37, 68, 69, 117, 104, 54, 37, 90, 99, 94, 56])
 IV = bytes([54, 111, 121, 90, 68, 114, 50, 50, 69, 51, 121, 99, 104, 106, 77, 37])
@@ -98,21 +98,23 @@ def get_name_region_from_reward(access_token):
 def get_openid_from_shop2game(uid):
     if not uid: return None
     try:
-        openid_url = "https://shop2game.com/api/auth/player_id_login"
-        openid_headers = {
+        openid_url = "https://topup.pk/api/auth/player_id_login"
+        openid_headers = { 
             "Accept": "application/json, text/plain, */*",
-            "Accept-Language": "ar-MA,ar;q=0.9,en-US;q=0.8,en;q=0.7,ar-AE;q=0.6,fr-FR;q=0.5,fr;q=0.4",
-            "Connection": "keep-alive",
-            "Content-Type": "application/json",
-            "Cookie": "source=mb; region=MA; mspid2=ca21e6ccc341648eea845c7f94b92a3c; language=ar; _ga=GA1.1.1955196983.1741710601; datadome=WY~zod4Q8I3~v~GnMd68u1t1ralV5xERfftUC78yUftDKZ3jIcyy1dtl6kdWx9QvK9PpeM~A_qxq3LV3zzKNs64F_TgsB5s7CgWuJ98sjdoCqAxZRPWpa8dkyfO~YBgr; session_key=v0tmwcmf1xqkp7697hhsno0di1smy3dm; _ga_0NY2JETSPJ=GS1.1.1741710601.1.1.1741710899.0.0.0",
-            "Origin": "https://shop2game.com",
-            "Referer": "https://shop2game.com/",
-            "Sec-Fetch-Dest": "empty",
-            "Sec-Fetch-Mode": "cors",
-            "Sec-Fetch-Site": "same-origin",
-            "User-Agent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36",
-            "sec-ch-ua-mobile": "?1",
-            "sec-ch-ua-platform": '"Android"'
+        "Accept-Encoding": "gzip, deflate, br, zstd",
+        "Accept-Language": "en-MM,en-US;q=0.9,en;q=0.8",
+        "Content-Type": "application/json",
+        "Origin": "https://topup.pk",
+        "Referer": "https://topup.pk/",
+        "sec-ch-ua": '"Not)A;Brand";v="8", "Chromium";v="138", "Android WebView";v="138"',
+        "sec-ch-ua-mobile": "?1",
+        "sec-ch-ua-platform": '"Android"',
+        "Sec-Fetch-Dest": "empty",
+        "Sec-Fetch-Mode": "cors",
+        "Sec-Fetch-Site": "same-origin",
+        "User-Agent": "Mozilla/5.0 (Linux; Android 15; RMX5070 Build/UKQ1.231108.001) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.7204.157 Mobile Safari/537.36",
+        "X-Requested-With": "mark.via.gp",
+        "Cookie": "source=mb; region=PK; mspid2=13c49fb51ece78886ebf7108a4907756; _fbp=fb.1.1753985808817.794945392376454660; language=en; datadome=WQaG3HalUB3PsGoSXY3TdcrSQextsSFwkOp1cqZtJ7Ax4YkiERHUgkgHlEAIccQO~w8dzTGM70D9SzaH7vymmEqOrVeX5pIsPVE22Uf3TDu6W3WG7j36ulnTg2DltRO7; session_key=hq02g63z3zjcumm76mafcooitj7nc79y",
         }
         payload = {"app_id": 100067, "login_id": str(uid)}
         res = requests.post(openid_url, headers=openid_headers, json=payload, verify=False)
@@ -139,7 +141,7 @@ def perform_major_login(access_token, open_id):
             game_data.timestamp = "2024-12-05 18:15:32"
             game_data.game_name = "free fire"
             game_data.game_version = 1
-            game_data.version_code = "1.108.3"
+            game_data.version_code = "1.120.2"
             game_data.os_info = "Android OS 9 / API-28 (PI/rel.cjw.20220518.114133)"
             game_data.device_type = "Handheld"
             game_data.network_provider = "Verizon Wireless"
